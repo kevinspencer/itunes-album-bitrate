@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-# Copyright © 2009 Kevin Spencer <kevin@kevinspencer.org>
+# Copyright 2009 Kevin Spencer <kevin@kevinspencer.org>
 #
 # Permission to use, copy, modify, distribute, and sell this software and its
 # documentation for any purpose is hereby granted without fee, provided that
@@ -14,7 +14,7 @@
 use HTML::Entities;
 use strict;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 my $bit_rate_limit = shift;
 $bit_rate_limit ||= 192;
@@ -43,3 +43,4 @@ if (%list) {
         print "$key: $list{$key}\n";
     }
 }
+
