@@ -1,5 +1,5 @@
-#!/usr/bin/perl -w
-# Copyright 2009 Kevin Spencer <kevin@kevinspencer.org>
+#!/usr/bin/env perl
+# Copyright 2009-2012 Kevin Spencer <kevin@kevinspencer.org>
 #
 # Permission to use, copy, modify, distribute, and sell this software and its
 # documentation for any purpose is hereby granted without fee, provided that
@@ -13,17 +13,18 @@
 
 use HTML::Entities;
 use strict;
+use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 my $bit_rate_limit = shift;
 $bit_rate_limit ||= 192;
 
 my $user = getpwuid($<);
 my $library_path = "/Users/$user/Music/iTunes/iTunes Music Library.xml";
-open(LIBRARY, $library_path) || die "Could not open $library_path - $!\n";
+open(my $lfh, '<', $library_path) || die "Could not open $library_path - $!\n";
 my ($artist, $album, %list);
-while (<LIBRARY>) {
+while (<$lfh>) {
     my $line = $_;
     if ($line =~ /<key>Artist<\/key><string>(.+)<\/string>/) {
         $artist = decode_entities($1);
@@ -37,7 +38,7 @@ while (<LIBRARY>) {
         }
     }
 }
-close(LIBRARY);
+close($lfh);
 if (%list) {
     for my $key (sort(keys(%list))) {
         print "$key: $list{$key}\n";
