@@ -1,9 +1,9 @@
-get-album-bitrate
+itunes-album-bitrate
 
 Parses an iTunes library XML file to find albums encoded below a specified
 bit rate.
 
 USAGE
 
-    get-album-bitrate     (below 192kbps - default)
-    get-album-bitrate 256 (below 256kbps)
+    itunes-album-bitrate     (below 192kbps - default)
+    itunes-album-bitrate 256 (below 256kbps)
